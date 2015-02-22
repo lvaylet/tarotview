@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TarotVIEW</title>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="ui/css/datepicker3.css" rel="stylesheet">
+        <link href="ui/css/tarotview.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div class="container">
+
+            <!-- Title -->
+            <div class="jumbotron">
+                <h1>
+                    TarotVIEW <img src="ui/img/ajax-loader.gif" alt="Loading..." id="loadingIndicator"/>
+                </h1>
+            </div>
+
+            <!-- Navigation bar -->
+            <ul id="navBar" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#tabGlobalRanking" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span> Classement général</a>
+                </li>
+                <li class="disabled">
+                    <a href="#tabNewScores" data-toggle="tab"><span class="glyphicon glyphicon-plus"></span> Saisir des scores</a>
+                </li>
+                <li class="disabled">
+                    <a href="#tabNewPlayer" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> Ajouter un joueur</a>
+                </li>
+                <li class="pull-right">
+                    <form class="form-inline" id="formLogin">
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="inputAdminPassword">Admin</label>
+                            <input type="password" class="form-control" placeholder="Password" id="inputAdminPassword">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="buttonSubmitAdminPassword">Login</button>
+                    </form>
+                </li>
+            </ul>
+
+            <!-- Content -->
+            <div class="tab-content">
+
+                <div class="tab-pane fade in active" id="tabGlobalRanking">
+                    <div class="col-md-offset-1 col-md-10 top-buffer">
+                        <div id="graphScoresHistory">
+                        </div>
+                    </div>
+                    <div class="col-md-offset-1 col-md-10 top-buffer">
+                        <table id="tableGlobalRanking" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Rang</th>
+                                    <th>NOM</th>
+                                    <th>Prénom</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tabNewScores">
+                    <form class="form-horizontal top-buffer" role="form">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Date</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control datepicker">
+                            </div>
+                        </div>
+                        <div class="form-group form-group-player">
+                            <label class="col-md-2 control-label">Joueur #1</label>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control uppercase typeahead last-name" placeholder="NOM" autocomplete="off" spellcheck="false">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control capitalize first-name" placeholder="Prénom" spellcheck="false" disabled>
+                            </div>
+                            <div class="col-md-1">
+                                <input type="text" class="form-control score" placeholder="Score">
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-success" id="buttonAddPlayer" href="#" role="button"><span class="glyphicon glyphicon-plus"></span></a>
+                                <a class="btn btn-danger" id="buttonRemovePlayer" href="#" role="button"><span class="glyphicon glyphicon-minus"></span></a>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="alert alert-danger alert-dismissable" id="alertErrorTotalPoints">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>Erreur!</strong> La somme des points devrait être nulle. La somme actuelle vaut <span id="totalPoints"></span> points.
+                            </div>
+                        </div>
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="alert alert-success alert-dismissable" id="alertSuccessNewScores">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                Les scores de <span id="submittedPlayers"></span> ont été enregistrés avec succès.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-2">
+                                <button type="submit" id="buttonSubmitNewScores" class="btn btn-primary">Soumettre</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab-pane fade" id="tabNewPlayer">
+                    <form class="form-horizontal top-buffer" role="form">
+                        <div class="form-group">
+                            <label for="inputNewPlayerLastName" class="col-md-2 control-label">NOM</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control uppercase" id="inputNewPlayerLastName" placeholder="NOM">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNewPlayerFirstName" class="col-md-2 control-label">Prénom</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control capitalize" id="inputNewPlayerFirstName" placeholder="Prénom">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-2">
+                                <button type="submit" id="buttonCreatePlayer" class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-md-offset-2 col-md-6">
+                        <div class="alert alert-success alert-dismissable" id="alertSuccessPlayerCreated">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <span id="newPlayer"></span> a été ajouté(e) avec succès à la liste des joueurs.
+                        </div>
+                    </div>
+                </div><!-- /#tabNewPlayer -->
+            </div><!-- /.tab-content -->
+
+        </div><!-- /.container -->
+
+        <script src="ui/js/jquery-2.1.0.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script src="ui/js/typeahead.bundle.js"></script>
+        <script src="ui/js/bootstrap-datepicker.js"></script>
+        <script src="ui/js/bootstrap-datepicker.fr.js"></script>
+        <script src="ui/js/tarotview.js"></script>
+    </body>
+</html>

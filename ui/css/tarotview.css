@@ -1,0 +1,71 @@
+/* TarotVIEW */
+
+.top-buffer {
+    margin-top: 2em;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+table > tbody > tr {
+    cursor: help;
+}
+
+/* Twitter Typeahead */
+.typeahead,
+.tt-query,
+.tt-hint {
+}
+
+.typeahead {
+}
+
+.typeahead:focus {
+}
+
+.tt-query {
+}
+
+.tt-hint {
+}
+
+.tt-dropdown-menu {
+    margin-top: 8px;
+    padding: 4px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+    padding: 3px 16px;
+}
+
+.tt-suggestion.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+.gist {
+
+}
+
+/* Highcharts */
+#graphScoresHistory {
+    height: 300px;
+}
